@@ -46,6 +46,16 @@ app.put("/api/genres/:_id", function(req, res){
 	})
 });
 
+app.delete("/api/genres/:_id", function(req, res){
+	var id = req.params._id
+	Genre.removeGenre(id, function(error, genre){
+		if (error) {
+			throw error;
+		}
+		res.json(genre);
+	})
+});
+
 app.get("/api/books", function(req, res){
 	Book.getBooks(function(error, books){
 		if (error) {
@@ -78,6 +88,16 @@ app.put("/api/books/:_id", function(req, res){
 	var id = req.params._id
 	var book = req.body;
 	Book.updateBook(id, book, {}, function(error, book){
+		if (error) {
+			throw error;
+		}
+		res.json(book);
+	})
+});
+
+app.delete("/api/books/:_id", function(req, res){
+	var id = req.params._id
+	Book.removeBook(id, function(error, book){
 		if (error) {
 			throw error;
 		}
